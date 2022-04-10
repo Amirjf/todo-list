@@ -1,18 +1,15 @@
-import { FC } from "react";
-import "./App.css";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import TodoItem from "./components/TodoItem/TodoItem";
+import { Tasks } from "./fakeData";
+import { ITodoItem } from "./Interfaces";
+import "./App.css";
 
 interface TodoItem {
-  priority: string;
-  isNew?: boolean;
-  dueDate?: string;
-  userIncluded?: boolean;
+  tasks: ITodoItem[];
 }
 
-const App: FC = () => {
+const App = () => {
   return (
     <Box
       m={1}
@@ -30,10 +27,16 @@ const App: FC = () => {
           width: "280px",
         }}
       >
-        <TodoItem priority="high" dueDate="23.11.2022" isNew />
-        <TodoItem priority="low" />
-        <TodoItem priority="critical" isNew userIncluded />
-        <TodoItem priority="low" dueDate="23.11.2022" userIncluded />
+        {Tasks.map((item) => (
+          <TodoItem
+            taskTitle={item.taskTitle}
+            dueDate={item.dueDate}
+            priority={item.priority}
+            taskDesc={item.taskDesc}
+            isNew={item.isNew}
+            userIncluded={item.userIncluded}
+          />
+        ))}
       </Box>
     </Box>
   );

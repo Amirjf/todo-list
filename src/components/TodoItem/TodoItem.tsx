@@ -2,17 +2,27 @@ import TodoItemHeader from "../TodoItemHeader/TodoItemHeader";
 import Card from "@mui/material/Card";
 import TodoItemFooter from "../todoItemFooter/TodoItemFooter";
 import TodoItemBody from "../todoItemBody/TodoItemBody";
+import { IUserIncluded } from "../../Interfaces";
 
 type Props = {
+  taskTitle: string;
+  taskDesc: string;
   priority: string;
-  isNew?: boolean;
-  dueDate?: string;
-  userIncluded?: boolean;
+  isNew: boolean;
+  dueDate: string;
+  userIncluded: IUserIncluded[];
 };
-const TodoItem = ({ priority, isNew, dueDate, userIncluded }: Props) => {
+const TodoItem = ({
+  priority,
+  isNew,
+  userIncluded,
+  taskDesc,
+  taskTitle,
+  dueDate,
+}: Props) => {
   const handleCardFooter = (): any => {
-    if (dueDate !== undefined || userIncluded !== undefined) {
-      return <TodoItemFooter dueDate={dueDate} userIncluded={userIncluded} />;
+    if (dueDate !== "" || userIncluded.length !== 0) {
+      return <TodoItemFooter userIncluded={userIncluded} dueDate={dueDate} />;
     }
   };
   return (
@@ -30,7 +40,7 @@ const TodoItem = ({ priority, isNew, dueDate, userIncluded }: Props) => {
       }}
     >
       <TodoItemHeader priority={priority} isNew={isNew} />
-      <TodoItemBody />
+      <TodoItemBody taskDesc={taskDesc} taskTitle={taskTitle} />
       {handleCardFooter()}
     </Card>
   );

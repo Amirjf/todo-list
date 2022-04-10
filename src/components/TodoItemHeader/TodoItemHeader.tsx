@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";

@@ -1,15 +1,15 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import AvatarGroup from "@mui/material/AvatarGroup";
 import Typography from "@mui/material/Typography";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Divider from "@mui/material/Divider";
+import { IUserIncluded } from "../../Interfaces";
 
 type Props = {
-  dueDate?: string;
-  userIncluded?: boolean;
+  dueDate: string;
+  userIncluded: IUserIncluded[];
 };
-const TodoItemFooter = ({ dueDate, userIncluded }: Props) => {
+const TodoItemFooter = ({ userIncluded, dueDate }: Props) => {
   return (
     <>
       <Divider
@@ -24,38 +24,26 @@ const TodoItemFooter = ({ dueDate, userIncluded }: Props) => {
                 Due Date
               </Typography>
               <Typography variant="subtitle2" display="block">
-                23.11.2021
+                {dueDate}
               </Typography>
             </>
           )}
         </Box>
-        {userIncluded && (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <AvatarGroup sx={{ width: "24px", height: "24px" }}>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: 24, height: 24 }}
-              />
-              <Avatar
-                alt="Travis Howard"
-                src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: 24, height: 24 }}
-              />
-              <Avatar
-                alt="Cindy Baker"
-                src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: 24, height: 24 }}
-              />
-              <Avatar
-                alt="Agnes Walker"
-                src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: 24, height: 24 }}
-              />
-            </AvatarGroup>
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {userIncluded.map((user) => (
+            <Avatar
+              alt="Remy Sharp"
+              src={user.avatar}
+              sx={{ width: 24, height: 24 }}
+            />
+          ))}
+          {userIncluded.length !== 0 ? (
             <EditOutlinedIcon fontSize="small" sx={{ color: "#50909a" }} />
-          </Box>
-        )}
+          ) : (
+            ""
+          )}
+        </Box>
       </Box>
     </>
   );
