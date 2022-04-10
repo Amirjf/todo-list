@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from "react";
+import "./App.css";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import TodoItem from "./components/TodoItem/TodoItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface TodoItem {
+  priority: string;
+  isNew?: boolean;
+  dueDate?: string;
+  userIncluded?: boolean;
 }
+
+const App: FC = () => {
+  return (
+    <Box
+      m={1}
+      p={1}
+      bgcolor="#f6f6f6"
+      sx={{
+        width: "280px",
+      }}
+    >
+      <Typography variant="body2" fontWeight={700}>
+        To do list title (3)
+      </Typography>
+      <Box
+        sx={{
+          width: "280px",
+        }}
+      >
+        <TodoItem priority="high" dueDate="23.11.2022" isNew />
+        <TodoItem priority="low" />
+        <TodoItem priority="critical" isNew userIncluded />
+        <TodoItem priority="low" dueDate="23.11.2022" userIncluded />
+      </Box>
+    </Box>
+  );
+};
 
 export default App;
